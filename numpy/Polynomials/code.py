@@ -1,5 +1,5 @@
-import numpy
+import numpy as np
 
 n = list(map(float,input().split()));
 m = input();
-print(numpy.polyval(n,int(m)));
+print(np.polyval(n,int(m)));
