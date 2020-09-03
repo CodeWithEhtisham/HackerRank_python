@@ -4,20 +4,32 @@ class Complex(object):
     def __init__(self, real, imaginary):
         self.real = real
         self.imaginary = imaginary
+
+    def __add__(self, no):
+        real = self.real + no.real
+        imaginary = self.imaginary + no.imaginary
+        return Complex(real, imaginary)
+
+    def __sub__(self, no):
+        real = self.real - no.real
+        imaginary = self.imaginary - no.imaginary
+        return Complex(real, imaginary)
+
+    def __mul__(self, no):
+        real = self.real * no.real - self.imaginary * no.imaginary
+        imaginary = self.real * no.imaginary + self.imaginary * no.real
+        return Complex(real, imaginary)
+
+    def __truediv__(self, no):
+        x = float(no.real ** 2 + no.imaginary ** 2)
+        y = self * Complex(no.real, -no.imaginary)
+        real = y.real / x
+        imaginary = y.imaginary / x
+        return Complex(real, imaginary)
+
     def mod(self):
-        return math.sqrt(self.real*self.real + self.imaginary*self.imaginary)
-    def __add__(self, c2):
-        return Complex(self.real + c2.real, self.imaginary + c2.imaginary) 
-    def __sub__(self, c2):
-        return Complex(self.real - c2.real, self.imaginary - c2.imaginary) 
-    def __mul__(self, c2):
-        return Complex(self.real*c2.real - self.imaginary*c2.imaginary, self.imaginary*c2.real + self.real*c2.imaginary)
-    def __truediv__(self, c2):
-        c2_mod2 = float(c2.real*c2.real + c2.imaginary*c2.imaginary)
-        return Complex((self.real*c2.real + self.imaginary*c2.imaginary)/c2_mod2, 
-                    (self.imaginary*c2.real - self.real*c2.imaginary)/c2_mod2);
-    def conjugate(self):
-        return Complex(self.real, -self.imaginary)
+        real = math.sqrt(self.real ** 2 + self.imaginary ** 2)
+        return Complex(real, 0)
 
     def __str__(self):
         if self.imaginary == 0:
@@ -38,4 +50,6 @@ if __name__ == '__main__':
     d = map(float, input().split())
     x = Complex(*c)
     y = Complex(*d)
-    print(*map(str, [x+y, x-y, x*y, x/y, str(round(x.mod(),2))+"+0.00i", "0.00+"+str(round(y.mod(),2))]), sep='\n')
+    print(*map(str, [x+y, x-y, x*y, x/y,x.mod(),y.mod()]), sep='\n')
+
+
