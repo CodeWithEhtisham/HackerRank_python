@@ -1,0 +1,12 @@
+import re
+s=input()
+small="".join([i for i in s if i.islower()])
+capital="".join([i for i in s if i.isupper()])
+number=re.findall(r'[0-9]',s)
+print(number)
+odd="".join(i for i in number if int(i)%2==1)
+print(odd)
+even=''.join([i for i in number if int(i)%2==0])
+print('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1357902468')
+sort=sorted(small)+sorted(capital)+sorted(odd)+sorted(even)
+print("".join([i for i in sort]))
